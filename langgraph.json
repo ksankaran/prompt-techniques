@@ -1,0 +1,12 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "few_shot_prompt": "./all_graphs.py:few_shot_prompt_graph",
+    "zero_shot_prompt": "./all_graphs.py:zero_shot_prompt_graph",
+    "chain_of_thought_prompt": "./all_graphs.py:chain_of_thought_prompt_graph",
+    "meta_prompt": "./all_graphs.py:meta_prompt_graph",
+    "generated_knowledge_prompt": "./all_graphs.py:generated_knowledge_prompt_graph",
+    "self_consistency_prompt": "./all_graphs.py:self_consistency_prompt_graph"
+  },
+  "env": ".env"
+}
