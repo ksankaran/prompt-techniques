@@ -3,7 +3,7 @@ from typing_extensions import TypedDict, Annotated
 from langgraph.graph.message import add_messages
 from langgraph.graph import StateGraph, START, END
 from langchain_core.messages import AnyMessage, RemoveMessage
-from langchain_openai import AzureChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnablePassthrough
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain_core.prompts import PromptTemplate
@@ -49,14 +49,7 @@ def get_graph(prompt: PromptTemplate, with_tools: bool = True, delete_messages: 
         Returns:
             state (State): The updated state with the response.
         """
-        params = {
-            "azure_endpoint": os.getenv("AZURE_ENDPOINT"),
-            "azure_deployment": os.getenv("AZURE_DEPLOYLMENT"),
-            "api_version": os.getenv("MODEL_API_VERSION"),
-            "api_key": os.getenv("AZURE_API_KEY"),
-            "timeout": 60,
-        }
-        model = AzureChatOpenAI(**params)
+        model = ChatOpenAI(model="gpt-4.1-mini")
         model_with_tools = model.bind_tools(tools)
         final_model = model_with_tools if with_tools else model
         chain = {"query": RunnablePassthrough()} | prompt | final_model
